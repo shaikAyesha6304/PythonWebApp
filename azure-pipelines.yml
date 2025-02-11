@@ -6,7 +6,7 @@
 trigger:
 - main
 
-pool: linux
+pool: az-pool
 
 strategy:
   matrix:
@@ -34,3 +34,9 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
